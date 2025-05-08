@@ -1,0 +1,13 @@
+main {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    padding: 0;
+}
+.user-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    width: 100%;
+}
