@@ -5,8 +5,8 @@ div {
     height: 100%;
 }
 img {
-    height: 4rem;
-    width: 4rem;
+    height: 3.5rem;
+    width: 3.5rem;
     border-radius: 50%;
 }
 button {
@@ -17,9 +17,14 @@ button {
     width: 100%;
     border-radius: 5px;
     border: 1px solid rgb(66, 147, 66);
-    box-shadow: 5px 5px 5px green;
+    box-shadow: 5px 5px 5px rgb(1, 99, 1);
+    background-color: rgb(182, 207, 182);
 }
 span {
     font-weight: bold;
     font-size: 16px;
+}
+button:hover{
+    background-color: rgba(58, 181, 13, 0.92);
+    cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { User } from './user.model';
 
 @Component({
@@ -9,9 +9,14 @@ import { User } from './user.model';
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent {
-  user = input.required<User>()
+  user = input.required<User>();
+  select = output<string>();
 
   get imagePath(){
     return '/assets/users/' + this.user().avatar
+  }
+
+  onSelectUser(){
+    this.select.emit(this.user().id)
   }
 }

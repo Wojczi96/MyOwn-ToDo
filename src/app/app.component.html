@@ -1,11 +1,19 @@
 <app-header/>
 <main>
   <ul class="user-list">
-    @for (user of users; track user) {
+    @for (user of users; track user.id) {
       <li>
         <app-user-list
-        [user]="user" />
+        [user]="user" 
+        (select)="onSelectedUser($event)"/>
       </li>
     }
   </ul>
+  
+  @if (selectUserId) {
+    <app-tasks [name]="selectUser.name"/>
+  } @else {
+    <p>Select user to check tasks!!!</p>
+  }
+  
 <main>
