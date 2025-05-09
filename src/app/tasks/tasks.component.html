@@ -1,6 +1,40 @@
 <section>
-    <div>
-        <h1>{{ name() }}'s Tasks:</h1>
-        <button>Add Task</button>
+    <div class="task-wrapper">
+        <div class="task-header">
+            <h1>{{ name() }}'s Tasks:</h1>
+            <button (click)="onOpenForm()">Add Task</button>
+        </div>
+        @if (isOpen) {
+            <div>
+            <form [formGroup]="newTaskForm">
+                <label for="title">Title</label>
+                <input id="title" type="text" formControlName="title">
+                <label for="summary">Summary</label>
+                <input id="summary" type="text" formControlName="summary">
+                <label for="date">Date</label>
+                <input id="date" type="date" formControlName="date">
+                <button (click)="onSumbit()">Submit</button>
+            </form>
+        </div>
+        }
+        <div>
+            <ul>
+                <li>
+                    <app-task/>
+                </li>
+                <li>
+                    <app-task/>
+                </li>
+                <li>
+                    <app-task/>
+                </li>
+                <li>
+                    <app-task/>
+                </li>
+                <li>
+                    <app-task/>
+                </li>
+            </ul>
+        </div>
     </div>
 </section>
