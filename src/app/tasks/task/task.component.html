@@ -1,6 +1,6 @@
 <section>
-    <h1>TITLE</h1>
-    <p>SUMMARY</p>
-    <p>TIME</p>
-    <button>Complete</button>
+    <h1>{{ task().title }}</h1>
+    <p>{{ task().summary }}</p>
+    <p>{{ task().dueDate }}</p>
+    <button (click)="onCompleteTask()">Complete</button>
 </section>

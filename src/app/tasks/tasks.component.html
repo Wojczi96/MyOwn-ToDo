@@ -19,21 +19,11 @@
         }
         <div>
             <ul>
-                <li>
-                    <app-task/>
+                @for (task of selectedUserTask; track task.id) {
+                    <li>
+                    <app-task [task]="task" (complete)="onCompleteTask($event)"/>
                 </li>
-                <li>
-                    <app-task/>
-                </li>
-                <li>
-                    <app-task/>
-                </li>
-                <li>
-                    <app-task/>
-                </li>
-                <li>
-                    <app-task/>
-                </li>
+                }
             </ul>
         </div>
     </div>
