@@ -1,6 +1,9 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NewTaskComponent } from "../new-task/new-task.component";
+import { TasksService } from './tasks.service';
+import { Task } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -12,63 +15,49 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class TasksComponent {
   userId = input.required<string>();
   name = input<string>();
-
+  newTaskIsOpen = output<boolean>();
+  taskService = inject(TasksService);
   isOpen = false;
-  newTaskForm = new FormGroup({
-    title: new FormControl(''),
-    summary: new FormControl(''),
-    date: new FormControl('')
-  })
 
-  tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ];
+  taskList: Task[] = [];
+  // isOpen = false;
+  // newTaskForm = new FormGroup({
+  //   title: new FormControl(''),
+  //   summary: new FormControl(''),
+  //   date: new FormControl('')
+  // })
+
+  // 
 
   get selectedUserTask(){
-    return this.tasks.filter((task) => task.userId === this.userId())
+    return this.taskList.filter((task) => task.userId === this.userId())
   }
 
+  constructor(){
+    this.taskList = this.taskService.getAllTasks();
+  }
+  
   onOpenForm(){
-    this.isOpen = !this.isOpen;
+    this.isOpen = true;
+    this.newTaskIsOpen.emit(this.isOpen);
   }
-  onCompleteTask(id: string){
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  onCompleteTask(id: number){
+    this.taskList = this.taskList.filter((task) => task.id !== id);
   }
 
-  onSumbit(){
-    const taskData = this.newTaskForm.value;
-    if (taskData.title && taskData.summary && taskData.date) {
-      this.tasks.push({
-        id: new Date().getTime().toString(),
-        userId: this.userId(), 
-        title: taskData.title,
-        summary: taskData.summary,
-        dueDate: taskData.date,
-      });
-      this.isOpen = false; 
-      this.newTaskForm.reset();
-    }
-  }
+
+  // onSumbit(){
+  //   const taskData = this.newTaskForm.value;
+  //   if (taskData.title && taskData.summary && taskData.date) {
+  //     this.tasks.push({
+  //       id: new Date().getTime().toString(),
+  //       userId: this.userId(), 
+  //       title: taskData.title,
+  //       summary: taskData.summary,
+  //       dueDate: taskData.date,
+  //     });
+  //     this.isOpen = false; 
+  //     this.newTaskForm.reset();
+  //   }
+  // }
 }

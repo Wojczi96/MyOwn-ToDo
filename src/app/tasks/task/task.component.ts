@@ -14,6 +14,6 @@ export class TaskComponent {
   complete = output<string>()
 
   onCompleteTask(){
-    this.complete.emit(this.task().id)
+    // this.complete.emit(this.task().id)
   }
 }

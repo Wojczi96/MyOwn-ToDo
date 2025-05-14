@@ -1,0 +1,11 @@
+<div class="new-task">
+    <form [formGroup]="newTaskForm">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" required>
+        <label for="summary">Summary</label>
+        <input id="summary" type="text" formControlName="summary" required>
+        <label for="dueDate">Date</label>
+        <input id="dueDate" type="date" formControlName="dueDate" required>
+        <button (click)="onSumbit()">Submit</button>
+    </form>
+</div>

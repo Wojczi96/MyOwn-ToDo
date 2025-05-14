@@ -1,19 +1,24 @@
-<app-header/>
-<main>
-  <ul class="user-list">
-    @for (user of users; track user.id) {
-      <li>
-        <app-user-list
-        [user]="user" 
-        (select)="onSelectedUser($event)"/>
-      </li>
-    }
-  </ul>
-  
-  @if (selectUserId) {
-    <app-tasks [userId]="selectUser.id" [name]="selectUser.name"/>
-  } @else {
-    <p>Select user to check tasks!!!</p>
-  }
-  
-<main>
+@if(!isOpen) {
+    <app-header/>
+    <main>
+      <ul class="user-list">
+        @for (user of users; track user.id) {
+          <li>
+            <app-user-list
+            [user]="user" 
+            (select)="onSelectedUser($event)"/>
+          </li>
+        }
+      </ul>
+      
+      @if (selectUserId) {
+        <app-tasks [userId]="selectUser.id" 
+        [name]="selectUser.name" 
+        (newTaskIsOpen)="isNewTaskOpen($event)"/>
+      } @else {
+        <p>Select user to check tasks!!!</p>
+      }
+    </main>
+} @else {
+  <app-new-task [userClicked]="selected" (newTask)="newTaskData($event)"/>
+}
